@@ -11,29 +11,30 @@ namespace EmployeeWage
     {
         const int isPartTime = 2;
         const int present = 1;
-        const int WagePerHrs = 20;
-        const int TotalWorkingDays = 20;
+        const int wagePerHrs = 20;
+        const int totalWorkingDays = 20, maximumHrs = 100;
         public void EmployeeAttendence()
         {
 
-            int TotalHrs = 0;
+            int totalHours = 0, day = 1;
             Random random = new Random();
-            for (int day = 1;  day<= TotalWorkingDays; day++)
+            while (day <= totalWorkingDays && totalHours <= maximumHrs)
             {
                 string message = "Day " + day +": ";
                 int empCheck = random.Next(0, 3);
 
                 switch (empCheck)
                 {
-                    case present: message += "Employee is Present"; TotalHrs += 8; break;
-                    case isPartTime: message += "Employee is working PartTime"; TotalHrs += 4; break;
+                    case present: message += "Employee is Present"; totalHours += 8; break;
+                    case isPartTime: message += "Employee is working PartTime"; totalHours += 4; break;
                     default:
                         message += "Employee is Absent";
                         break;
                 }
                 Console.WriteLine(message);
+                day++;
             }
-            Console.WriteLine("Total Wage: " + TotalHrs * WagePerHrs);
+            Console.WriteLine("Total Wage: " + totalHours * wagePerHrs);
             
         }
     }
