@@ -11,14 +11,12 @@ namespace EmployeeWage
     {
         const int isPartTime = 2;
         const int present = 1;
-        const int wagePerHrs = 20;
-        const int totalWorkingDays = 20, maximumHrs = 100;
-        public void EmployeeAttendence()
+        public void EmployeeAttendence(Company company)
         {
-
+            Console.WriteLine(company.Name);
             int totalHours = 0, day = 1;
             Random random = new Random();
-            while (day <= totalWorkingDays && totalHours <= maximumHrs)
+            while (day <= company.NumberOfWorkingDays && totalHours <= company.WorkingHoursPerMonth)
             {
                 string message = "Day " + day +": ";
                 int empCheck = random.Next(0, 3);
@@ -34,7 +32,7 @@ namespace EmployeeWage
                 Console.WriteLine(message);
                 day++;
             }
-            Console.WriteLine("Total Wage: " + totalHours * wagePerHrs);
+            Console.WriteLine("Total Wage: " + totalHours * company.WagePerHour);
             
         }
     }
