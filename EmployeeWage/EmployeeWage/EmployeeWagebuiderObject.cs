@@ -31,10 +31,10 @@ namespace EmployeeWage
         {
 
             int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+            Random random = new Random();
             while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numOfWorkingDays)
             {
                 totalWorkingDays++;
-                Random random = new Random();
                 int empCheck = random.Next(0, 3);
                 switch (empCheck)
                 {
@@ -49,6 +49,7 @@ namespace EmployeeWage
                         break;
                 }
                 totalEmpHrs += empHrs;
+                companyEmpWage.SetDailyEmpWage($"{totalWorkingDays}",(empHrs*companyEmpWage.empRatePerHour));
                 Console.WriteLine("Day#" + totalWorkingDays + " Emp Hrs: " + empHrs);
             }
             return totalEmpHrs * companyEmpWage.empRatePerHour;
