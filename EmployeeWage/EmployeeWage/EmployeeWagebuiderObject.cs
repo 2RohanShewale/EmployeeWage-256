@@ -8,23 +8,24 @@ namespace EmployeeWage
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
 
-        private List<CompanyEmpWage> companyEmpWageList;
+        private Dictionary<string,CompanyEmpWage> companyEmpWageDictionary;//UC14
 
         public EmployeeWagebuiderObject()
         {
-            this.companyEmpWageList = new List<CompanyEmpWage>();
+            this.companyEmpWageDictionary = new Dictionary<string, CompanyEmpWage>();
         }
         public void AddCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
         {
             CompanyEmpWage company1 = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
-            companyEmpWageList.Add(company1);
+            companyEmpWageDictionary.Add(company,company1);
         }
         public void ComputeEmpWage()
         {
-            foreach (var companyEmpWage in companyEmpWageList)
+            foreach (KeyValuePair<string, CompanyEmpWage> companyEmpWage in companyEmpWageDictionary)
             {
-                companyEmpWage.SetTotalEmpWage(ComputeEmpWage(companyEmpWage));
-                Console.WriteLine(companyEmpWage.ToString());
+                // companyEmpWage.SetTotalEmpWage(ComputeEmpWage(companyEmpWage));
+                companyEmpWage.Value.SetTotalEmpWage(ComputeEmpWage(companyEmpWage.Value));
+                Console.WriteLine(companyEmpWage.Value.toString());
             }
         }
         public int ComputeEmpWage(CompanyEmpWage companyEmpWage)
@@ -53,6 +54,10 @@ namespace EmployeeWage
                 Console.WriteLine("Day#" + totalWorkingDays + " Emp Hrs: " + empHrs);
             }
             return totalEmpHrs * companyEmpWage.empRatePerHour;
+        }
+        public int getTotalWage(string CompanyName)
+        {
+            return this.companyEmpWageDictionary[CompanyName].totalEmpWage;
         }
     }
 
